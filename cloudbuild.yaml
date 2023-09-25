@@ -1,7 +1,7 @@
 steps:
     # Download .env file
-    - name: "gcr.io/cloud-builders/gsutil"
-      args: ["cp", "gs://secrets-locker/.prod.env", ".env"]
+    #- name: "gcr.io/cloud-builders/gsutil"
+    #  args: ["cp", "gs://secrets-locker/.prod.env", ".env"]
     # build the container image
     - name: 'gcr.io/cloud-builders/docker'
       args: [ 'build', '-t', 'gcr.io/${_PROJECT_ID}/node-api-tut', '.' ]
@@ -10,4 +10,4 @@ steps:
       args: [ 'push', 'gcr.io/${_PROJECT_ID}/node-api-tut']
       # Deploy container image to Cloud Run
     - name: "gcr.io/cloud-builders/gcloud"
-      args: ['run', 'deploy', 'node-api-tut', '--image', 'gcr.io/${_PROJECT_ID}/node-api-tut', '--region', 'europe-west4', '--platform', 'managed', '--allow-unauthenticated']
+      args: ['run', 'deploy', 'node-api-tut', '--image', 'gcr.io/${_PROJECT_ID}/node-api-tut', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
